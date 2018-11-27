@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  */
 @RestController
 @RequestMapping("/employees")
-public class Employees {
+public class EmployeeController {
 
     private final Logger log = Logger.getLogger(this.getClass().getName());
 
@@ -51,8 +51,12 @@ public class Employees {
                 "      \"gender\": \"Female\"\n" +
                 "    }\n" +
                 "  ]";
+
+
         return ResponseEntity.ok(result);
     }
+
+
 
 
 }
