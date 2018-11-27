@@ -30,5 +30,10 @@ public class EmployeeController {
     }
 
 
+    @PostMapping(produces = {"application/json"})
+    public ResponseEntity<List<Employee>> add(@RequestBody Employee employee) {
+        this.employees.add(new Employee(employee.getId(),employee.getName(),employee.getAge(),employee.getGender()));
+        return ResponseEntity.ok(employees);
+    }
 
 }
