@@ -38,7 +38,28 @@ public class EmployeeController {
 
     @GetMapping(path = "/del/{id}", produces = {"application/json"})
     public ResponseEntity<String> delById(@PathVariable String id) {
-        this.employees.stream().filter(employee -> employee.getId() != id).collect(Collectors.toList());
-        return ResponseEntity.ok("Deleted");
+        String result = "";
+        for (Employee employee : employees) {
+            if (employee.getId().contentEquals(id)) {
+                employees.remove(employee);
+                result += employee.getName() + " is deleted. ";
+            }
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.ok("Not found");
+    }
+
+    @PostMapping(path = "/update/{id}", produces = {"application/json"})
+    public ResponseEntity<String> updateById(@PathVariable String id) {
+//        String result = "";
+//        for (Employee employee: employees){
+//            if (employee.getId() == id){
+//                result += employee.getName() + " is deleted. ";
+//
+//            }
+//
+//        }
+        return ResponseEntity.ok("Updateed");
+//    }
     }
 }
