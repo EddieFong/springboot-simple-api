@@ -25,7 +25,7 @@ public class EmployeeController {
     @GetMapping(path = "/init", produces = {"application/json"})
     public ResponseEntity<List<Employee>> initAll() {
 
-        this.employees = new ArrayList<Employee>(java.util.Arrays.asList(new Employee("A","A",1,'A'),new Employee("B","B",2,'B')));
+        this.employees = new ArrayList<Employee>(java.util.Arrays.asList(new Employee("1","Name1",1,"Male"),new Employee("2","Name2",2,"Female")));
         return ResponseEntity.ok(employees);
     }
 
@@ -50,10 +50,10 @@ public class EmployeeController {
     }
 
     @PostMapping(path = "/update/{id}", produces = {"application/json"})
-    public ResponseEntity<String> updateById(@RequestBody Employee newEmployee) {
-        String result = "1";
+    public ResponseEntity<String> updateById(@PathVariable String id, @RequestBody Employee newEmployee) {
+        String result = "";
         for (Employee employee : employees) {
-            if (employee.getId().contentEquals(newEmployee.getId())) {
+            if (employee.getId().contentEquals(id)) {
                 employee.setName(newEmployee.getName());
                 employee.setAge(newEmployee.getAge());
                 employee.setGender(newEmployee.getGender());
