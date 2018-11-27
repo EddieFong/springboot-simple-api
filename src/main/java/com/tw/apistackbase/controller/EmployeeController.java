@@ -50,16 +50,19 @@ public class EmployeeController {
     }
 
     @PostMapping(path = "/update/{id}", produces = {"application/json"})
-    public ResponseEntity<String> updateById(@PathVariable String id) {
-//        String result = "";
-//        for (Employee employee: employees){
-//            if (employee.getId() == id){
-//                result += employee.getName() + " is deleted. ";
-//
-//            }
-//
-//        }
-        return ResponseEntity.ok("Updateed");
-//    }
+    public ResponseEntity<String> updateById(@RequestBody Employee newEmployee) {
+        String result = "1";
+        for (Employee employee : employees) {
+            if (employee.getId().contentEquals(newEmployee.getId())) {
+                employee.setName(newEmployee.getName());
+                employee.setAge(newEmployee.getAge());
+                employee.setGender(newEmployee.getGender());
+
+                result += employee.getName() + " is updated. ";
+            }
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.ok("Not found");
+
     }
 }
