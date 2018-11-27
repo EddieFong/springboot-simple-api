@@ -36,4 +36,9 @@ public class EmployeeController {
         return ResponseEntity.ok(employees);
     }
 
+    @GetMapping(path = "/del/{id}", produces = {"application/json"})
+    public ResponseEntity<String> delById(@PathVariable String id) {
+        this.employees.stream().filter(employee -> employee.getId() != id).collect(Collectors.toList());
+        return ResponseEntity.ok("Deleted");
+    }
 }
