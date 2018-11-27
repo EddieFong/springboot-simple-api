@@ -31,9 +31,9 @@ public class EmployeeController {
 
 
     @PostMapping(produces = {"application/json"})
-    public ResponseEntity<List<Employee>> add(@RequestBody Employee employee) {
+    public ResponseEntity<String> add(@RequestBody Employee employee) {
         this.employees.add(new Employee(employee.getId(),employee.getName(),employee.getAge(),employee.getGender()));
-        return ResponseEntity.ok(employees);
+        return ResponseEntity.ok("Success");
     }
 
     @GetMapping(path = "/del/{id}", produces = {"application/json"})
