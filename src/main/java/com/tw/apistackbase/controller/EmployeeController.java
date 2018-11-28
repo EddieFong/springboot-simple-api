@@ -17,6 +17,7 @@ public class EmployeeController {
 
     private final Logger log = Logger.getLogger(this.getClass().getName());
     List<Employee> employees = new ArrayList<>();
+    int employeeId = 0;
     @GetMapping(path = "", produces = {"application/json"})
     public ResponseEntity<List<Employee>> getAll() {
         return ResponseEntity.ok(employees);
@@ -32,7 +33,8 @@ public class EmployeeController {
 
     @PostMapping(produces = {"application/json"})
     public ResponseEntity<String> add(@RequestBody Employee employee) {
-        this.employees.add(new Employee(employee.getId(),employee.getName(),employee.getAge(),employee.getGender()));
+        this.employees.add(new Employee(Integer.toString(employeeId),employee.getName(),employee.getAge(),employee.getGender()));
+        employeeId++;
         return ResponseEntity.ok("Success");
     }
 
@@ -64,6 +66,7 @@ public class EmployeeController {
             return ResponseEntity.ok(result);
         }
         return ResponseEntity.ok("Not found");
-
     }
+
+
 }
