@@ -38,15 +38,16 @@ public class EmployeeController {
 
     @GetMapping(path = "/del/{id}", produces = {"application/json"})
     public ResponseEntity<String> delById(@PathVariable String id) {
-        String result = "";
+        String result = "Not Found";
+        Employee targetEmployee = null;
         for (Employee employee : employees) {
             if (employee.getId().contentEquals(id)) {
-                employees.remove(employee);
-                result += employee.getName() + " is deleted. ";
+                targetEmployee = employee;
+                result = employee.getName() + " is deleted. ";
             }
-            return ResponseEntity.ok(result);
         }
-        return ResponseEntity.ok("Not found");
+        employees.remove(targetEmployee);
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping(path = "/update/{id}", produces = {"application/json"})
